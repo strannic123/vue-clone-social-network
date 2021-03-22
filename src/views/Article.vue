@@ -46,7 +46,7 @@
           <p>{{article.body}}</p>
         </div>
       </div>
-      TAGLIST
+      <mcv-tag-list :tags="article.tagList"/>
     </div>
   </div>
 </template>
@@ -57,10 +57,15 @@ import {actionTypes as articleActionTypes} from "@/store/modules/article";
 import {getterTypes as authGetterTypes} from "@/store/modules/auth";
 import McvLoading from "@/components/Loading";
 import McvErrorMessage from "@/components/ErrorMessage";
+import McvTagList from "@/components/TagList"
 
 export default {
 name: "McvArticle",
-  components: {McvErrorMessage, McvLoading},
+  components: {
+    McvErrorMessage,
+    McvLoading,
+    McvTagList
+  },
   computed: {
   ...mapState({
     isLoading: state => state.article.isLoading,
