@@ -7,13 +7,13 @@ const state = {
 }
 
 export const mutationTypes = {
-    getArticleStart: '[Article] Get article start',
-    getArticleSuccess: '[Article] Get article success',
-    getArticleFailure: '[Article] Get article failure'
+    getArticleStart: '[article] Get article start',
+    getArticleSuccess: '[article] Get article success',
+    getArticleFailure: '[article] Get article failure'
 }
 
 export const actionTypes = {
-    getArticle: '[Article] Get tags'
+    getArticle: '[article] Get article'
 }
 
 const mutations = {
@@ -33,10 +33,11 @@ const mutations = {
 }
 
 const actions = {
-    [actionTypes.getArticle](context, slug) {
+    [actionTypes.getArticle](context, {slug}) {
         return new Promise(resolve => {
             context.commit(mutationTypes.getArticleStart)
-            articleApi.getArticle(slug)
+            articleApi
+                .getArticle(slug)
                 .then(article => {
                     context.commit(mutationTypes.getArticleSuccess, article)
                     resolve(article)
