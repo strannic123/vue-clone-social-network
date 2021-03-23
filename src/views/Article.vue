@@ -40,13 +40,15 @@
     </div>
     <div class="container page">
       <mcv-loading v-if="isLoading"/>
-      <mcv-error-message v-if="error" :message="error"/>
+      <mcv-error-message v-if="isLoading" :message="error"/>
       <div class="row article-content" v-if="article">
+      <div class="col-xs-12">
         <div>
           <p>{{article.body}}</p>
         </div>
-      </div>
       <mcv-tag-list :tags="article.tagList"/>
+      </div>
+      </div>
     </div>
   </div>
 </template>
@@ -90,7 +92,8 @@ name: "McvArticle",
   },
   methods: {
     deleteArticle() {
-      this.$store.dispatch(articleActionTypes.deleteArticle, {
+      this.$store
+      .dispatch(articleActionTypes.deleteArticle, {
         slug: this.$route.params.slug
       })
       .then(() => {
