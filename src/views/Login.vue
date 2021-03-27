@@ -69,7 +69,6 @@ export default {
   },
   methods: {
     onSubmit() {
-      console.log('click button')
       this.$store.dispatch(actionTypes.login, {
         email: this.email,
         password: this.password

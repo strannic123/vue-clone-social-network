@@ -4,7 +4,7 @@
       <div class="row">
         <div class="col-md-6 offset-md-3 col-xs-12">
           <h1 class="text-xs-center">Settings</h1>
-          <mcv-validation-errors :validation-errors="validationErrors"/>
+          <mcv-validation-errors v-if="validationErrors" :validation-errors="validationErrors"/>
           <form @submit.prevent="onSubmit">
             <fieldset>
               <fieldset class="form-group">
@@ -54,6 +54,7 @@
                   type="submit"
                   class="btn btn-lg btn-primary pull-xs-right"
                   :disabled="isSubmitting"
+                  @click="onSubmit"
               >Update settings</button>
             </fieldset>
           </form>
@@ -71,11 +72,11 @@
 <script>
 import {mapState, mapGetters} from "vuex"
 import {getterTypes as authGetterTypes, actionTypes as authActionTypes} from "@/store/modules/auth";
-import ValidationErrors from "@/components/ValidationErrors";
+import McvValidationErrors from "@/components/ValidationErrors";
 
 export default {
   name: "McvSettings",
-  components: {ValidationErrors},
+  components: {McvValidationErrors},
   computed: {
     ...mapState({
       isSubmitting: state => state.settings.isSubmitting,
@@ -96,12 +97,12 @@ export default {
   },
   methods: {
     onSubmit() {
-      console.log('submitting settings', this.form)
-      this.$store.dispatch(authActionTypes.updateCurrentUser, {currentUserInput: this.form})
+      this.$store.dispatch(authActionTypes.updateCurrentUser, {currentUserInput: this.form}).then(() => {
+        this.$router.push({name: 'userProfile', params: {slug: this.currentUser.username}})
+      })
     },
 
     logout() {
-      console.log('logout')
       this.$store.dispatch(authActionTypes.logout).then(() => {
         this.$router.push({name: 'globalFeed'})
       })

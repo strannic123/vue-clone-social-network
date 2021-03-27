@@ -85,13 +85,11 @@ export default {
   },
   methods: {
     onSubmit() {
-      console.log('click button')
       this.$store.dispatch(actionTypes.register, {
         email: this.email,
         username: this.username,
         password: this.password
-      }).then(user => {
-        console.log('successfully register user', user)
+      }).then(() => {
         this.$router.push({name: 'globalFeed'})
       })
     }

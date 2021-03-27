@@ -85,7 +85,6 @@ name: "McvArticle",
     }
   },
   mounted() {
-    console.log(this.$route)
     this.$store.dispatch(articleActionTypes.getArticle, {
       slug: this.$route.params.slug
     })

@@ -90,7 +90,6 @@ export default {
         body: this.body,
         tagList: this.tagList.split(' ')
       }
-      console.log(form)
       this.$emit('articleSubmit', form)
     },
 

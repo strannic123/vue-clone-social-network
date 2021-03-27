@@ -7,11 +7,8 @@
           <mcv-feed-toggler/>
           <mcv-feed :api-url="apiUrl"/>
         </div>
-
         <div class="col-md-3">
-
           <mcv-popular-tags />
-
         </div>
       </div>
     </div>

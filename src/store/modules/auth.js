@@ -88,9 +88,9 @@ const mutations = {
         state.isLoading = true
     },
     [mutationTypes.getCurrentUserSuccess](state, payload) {
-        state.currentUser = payload
-        state.isLoggedIn = true
         state.isLoading = false
+        state.isLoggedIn = true
+        state.currentUser = payload
     },
     [mutationTypes.getCurrentUserFailure](state){
         state.isLoading = false

@@ -81,31 +81,32 @@ export default {
       required: true
     }
   },
-  data() {
-    return {
-      limit,
-      url: '/'
-    }
-  },
   computed: {
     ...mapState({
       isLoading: state => state.feed.isLoading,
       feed: state => state.feed.data,
       error: state => state.feed.error
     }),
-    currentPage() {
-      return Number(this.$route.query.page || '1')
+    limit() {
+        return limit
     },
     baseUrl() {
       return this.$route.path
     },
+    currentPage() {
+      return Number(this.$route.query.page || '1')
+    },
+
     offset() {
-      return this.currentPage * limit -limit
+      return this.currentPage * limit - limit
     }
 
   },
   watch: {
     currentPage() {
+      this.fetchFeed()
+    },
+    apiUrl() {
       this.fetchFeed()
     }
   },
